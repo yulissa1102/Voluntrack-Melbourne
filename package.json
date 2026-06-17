@@ -5,7 +5,7 @@
   "packageManager": "pnpm@11.0.7",
   "scripts": {
     "dev": "NEXT_TEST_WASM_DIR=node_modules/@next/swc-wasm-nodejs next dev --webpack --hostname 127.0.0.1",
-    "build": "NEXT_TEST_WASM_DIR=node_modules/@next/swc-wasm-nodejs next build --webpack",
+    "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
