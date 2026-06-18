@@ -139,6 +139,31 @@ export function getResumeSupport(opportunity: Opportunity) {
   };
 }
 
+export function getNotifyButtonLabel(opportunity: Opportunity) {
+  if (opportunity.applicationStatus === "Closed") {
+    return "Notify me for next cycle";
+  }
+
+  if (opportunity.applicationStatus === "Ongoing") {
+    return "Notify me about new roles";
+  }
+
+  if (opportunity.applicationStatus === "Open now" || opportunity.applicationStatus === "Closing soon") {
+    return "Remind me before the deadline";
+  }
+
+  if (
+    opportunity.applicationStatus === "Opening soon" ||
+    opportunity.applicationStatus === "Future reminder" ||
+    !opportunity.applicationOpenDate ||
+    (!opportunity.applicationDeadline && opportunity.dateConfidence === "not_announced")
+  ) {
+    return "Notify me when applications open";
+  }
+
+  return opportunity.applicationDeadline ? "Remind me before the deadline" : "Notify me when applications open";
+}
+
 export function getOpenOrUpcomingCount() {
   return opportunities.filter((opportunity) => opportunity.applicationStatus !== "Closed").length;
 }
@@ -195,7 +220,40 @@ function getFallbackResumeUsefulFor(opportunity: Opportunity) {
 }
 
 function getFallbackResumeBullet(opportunity: Opportunity, usefulFor: string[]) {
-  const focus = usefulFor.slice(0, 3).join(", ");
+  const skills = formatList(usefulFor.slice(0, 3));
+  const context = getResumeContext(opportunity);
 
-  return `Supported ${opportunity.organisation} volunteering activities, building ${focus} skills through local community experience.`;
+  return `Supported ${context}, strengthening ${skills} skills in a local volunteer setting.`;
+}
+
+function getResumeContext(opportunity: Opportunity) {
+  if (opportunity.categories.includes("Events") || opportunity.opportunityType.includes("Event-based")) {
+    return `event operations and visitor engagement with ${opportunity.organisation}`;
+  }
+
+  if (opportunity.categories.includes("Sustainability")) {
+    return `environmental volunteering activities with ${opportunity.organisation}`;
+  }
+
+  if (opportunity.categories.includes("Food Relief") || opportunity.categories.includes("Community")) {
+    return `community support activities with ${opportunity.organisation}`;
+  }
+
+  if (opportunity.categories.includes("Museum") || opportunity.categories.includes("Arts & Culture")) {
+    return `visitor engagement and public program support with ${opportunity.organisation}`;
+  }
+
+  return `volunteer activities with ${opportunity.organisation}`;
+}
+
+function formatList(items: string[]) {
+  if (items.length <= 1) {
+    return items[0] ?? "communication";
+  }
+
+  if (items.length === 2) {
+    return `${items[0]} and ${items[1]}`;
+  }
+
+  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { ElementType, ReactNode } from "react";
 import {
   ArrowLeft,
+  Bell,
   BriefcaseBusiness,
   CalendarDays,
   CheckCircle2,
@@ -21,6 +22,7 @@ import {
   checkStatusTone,
   dateConfidenceCopy,
   formatDate,
+  getNotifyButtonLabel,
   getOpportunityById,
   getReminderTags,
   getResumeSupport,
@@ -56,6 +58,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
   }
 
   const resumeSupport = getResumeSupport(opportunity);
+  const notifyButtonLabel = getNotifyButtonLabel(opportunity);
 
   return (
     <main className="bg-paper">
@@ -101,6 +104,19 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
       <section className="py-10 sm:py-14">
         <div className="mx-auto grid max-w-5xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.35fr_0.85fr] lg:px-8">
           <div className="space-y-6">
+            <a
+              href={opportunity.applicationLink}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between gap-4 rounded-lg bg-ink p-4 text-sm font-black text-white transition hover:bg-river"
+            >
+              <span className="inline-flex items-center gap-2">
+                <LinkIcon className="h-4 w-4" aria-hidden="true" />
+                Official application link
+              </span>
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+
             <Panel title="Before you apply" icon={ListChecks}>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {[
@@ -113,6 +129,17 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
                   <li key={item} className="flex gap-2 rounded-lg border border-slate-200 bg-paper px-3 py-2 text-sm font-bold text-ink">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-leaf" aria-hidden="true" />
                     <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+
+            <Panel title="Application requirements" icon={ShieldCheck}>
+              <ul className="space-y-3">
+                {opportunity.hardRequirements.map((requirement) => (
+                  <li key={requirement} className="flex gap-3 text-sm leading-6 text-slate-700">
+                    <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-gum" />
+                    <span>{requirement}</span>
                   </li>
                 ))}
               </ul>
@@ -135,33 +162,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
               </div>
             </Panel>
 
-            <NotifyButton />
-
-            <a
-              href={opportunity.applicationLink}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-between gap-4 rounded-lg bg-ink p-4 text-sm font-black text-white transition hover:bg-river"
-            >
-              <span className="inline-flex items-center gap-2">
-                <LinkIcon className="h-4 w-4" aria-hidden="true" />
-                Official application link
-              </span>
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-
-            <Panel title="Hard requirements" icon={ShieldCheck}>
-              <ul className="space-y-3">
-                {opportunity.hardRequirements.map((requirement) => (
-                  <li key={requirement} className="flex gap-3 text-sm leading-6 text-slate-700">
-                    <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-gum" />
-                    <span>{requirement}</span>
-                  </li>
-                ))}
-              </ul>
-            </Panel>
-
-            <Panel title="Full description" icon={FileText}>
+            <Panel title="About this opportunity" icon={FileText}>
               <p className="text-base leading-8 text-slate-700">{opportunity.description}</p>
             </Panel>
 
@@ -224,6 +225,10 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
                   </Tag>
                 ))}
               </div>
+            </Panel>
+
+            <Panel title="Notify me" icon={Bell}>
+              <NotifyButton label={notifyButtonLabel} />
             </Panel>
           </aside>
         </div>

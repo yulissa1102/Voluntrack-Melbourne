@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { Bell, X } from "lucide-react";
 
-export function NotifyButton() {
+type NotifyButtonProps = {
+  label: string;
+};
+
+export function NotifyButton({ label }: NotifyButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export function NotifyButton() {
         className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-river/30 bg-white px-4 text-sm font-black text-river transition hover:border-river hover:bg-river hover:text-white sm:w-auto"
       >
         <Bell className="h-4 w-4" aria-hidden="true" />
-        Notify me when applications open
+        {label}
       </button>
 
       {isOpen ? (
@@ -33,7 +37,7 @@ export function NotifyButton() {
         >
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="font-black text-ink">Email reminder coming soon.</p>
+              <p className="font-black text-ink">Reminder feature coming soon.</p>
               <p className="mt-1 font-semibold text-slate-600">Join the waitlist.</p>
             </div>
             <button

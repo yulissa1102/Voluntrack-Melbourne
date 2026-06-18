@@ -21,11 +21,10 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase text-sun">Melbourne international student volunteering</p>
             <h1 className="mt-4 max-w-2xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-              Find volunteering opportunities in Melbourne, all in one place.
+              Find student-friendly volunteering opportunities in Melbourne.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/[0.85] sm:text-lg">
-              A curated opportunity tracker for international students to discover, compare and follow volunteering roles
-              across events, museums, community programs and sustainability projects.
+              Compare volunteering roles by deadline, requirements, career relevance and application status — all in one place.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -60,8 +59,7 @@ export default function HomePage() {
       <section className="bg-paper pb-12">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.35fr_0.85fr] lg:px-8">
           <div>
-            <p className="text-sm font-black uppercase text-gum">Student MVP</p>
-            <h2 className="mt-2 max-w-2xl text-3xl font-black text-ink">Why VolunTrack?</h2>
+            <h2 className="max-w-2xl text-3xl font-black text-ink">Why VolunTrack?</h2>
             <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
               Built to help international students find volunteering opportunities that are easier to compare, prepare
               for, and use as local experience.
@@ -98,9 +96,9 @@ export default function HomePage() {
             </p>
             <ul className="mt-4 space-y-3">
               {[
-                "Can international students find a suitable volunteering role faster with structured filters?",
-                "Which information matters most before applying: deadline, WWCC, police check, location, career relevance, or role type?",
-                "Do students want volunteering opportunities linked to resume and LinkedIn outcomes?"
+                "Can students find a suitable role faster with structured filters?",
+                "What information matters most before applying?",
+                "Do resume and LinkedIn outcomes make volunteering more useful?"
               ].map((item) => (
                 <li key={item} className="flex gap-2 text-sm leading-6 text-slate-700">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-leaf" aria-hidden="true" />
@@ -115,7 +113,7 @@ export default function HomePage() {
       <OpportunityExplorer
         opportunities={opportunities}
         title="Explore International-student-friendly volunteering opportunities"
-        subtitle="Filter by category, career relevance, role type, application status, and hard checks. Career relevance tags are guidance only, not application restrictions."
+        subtitle="Filter by category, career relevance, role type, application status, and checks and requirements. Career relevance tags are guidance only, not application restrictions."
       />
 
       <section className="border-t border-slate-200 bg-white py-8">

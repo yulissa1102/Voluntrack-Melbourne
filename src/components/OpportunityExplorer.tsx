@@ -195,7 +195,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
             </Select>
           </div>
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+          <div className="mt-4 grid items-start gap-4 lg:grid-cols-2">
             <MultiSelectGroup
               label="Category"
               options={options.categories}
@@ -240,7 +240,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
               ))}
             </Select>
 
-            <Select label="Record type" value={filters.recordType} onChange={(value) => updateFilter("recordType", value)}>
+            <Select label="Listing type" value={filters.recordType} onChange={(value) => updateFilter("recordType", value)}>
               <option>All</option>
               {options.recordTypes.map((type) => (
                 <option key={type} value={type}>
@@ -340,7 +340,7 @@ function MultiSelectGroup({
   onToggle: (value: string) => void;
 }) {
   return (
-    <details className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+    <details className="self-start rounded-lg border border-slate-200 bg-slate-50 p-3">
       <summary className="cursor-pointer list-none text-xs font-bold uppercase text-slate-500 marker:hidden">
         <span className="flex items-center justify-between gap-3">
           <span>{label}</span>
