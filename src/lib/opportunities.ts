@@ -128,6 +128,17 @@ export function getReminderTags(opportunity: Opportunity) {
   return [...tags];
 }
 
+export function getResumeSupport(opportunity: Opportunity) {
+  const usefulFor = opportunity.resumeUsefulFor?.length
+    ? opportunity.resumeUsefulFor
+    : getFallbackResumeUsefulFor(opportunity);
+
+  return {
+    usefulFor,
+    bullet: opportunity.resumeBullet ?? getFallbackResumeBullet(opportunity, usefulFor)
+  };
+}
+
 export function getOpenOrUpcomingCount() {
   return opportunities.filter((opportunity) => opportunity.applicationStatus !== "Closed").length;
 }
@@ -136,4 +147,55 @@ export function getCategoryCount() {
   return categoryOptions.filter((category) =>
     opportunities.some((opportunity) => opportunity.categories.includes(category))
   ).length;
+}
+
+function getFallbackResumeUsefulFor(opportunity: Opportunity) {
+  const skills = new Set<string>();
+
+  if (opportunity.categories.includes("Events")) {
+    skills.add("event support");
+    skills.add("teamwork");
+  }
+
+  if (opportunity.categories.includes("Visitor Experience")) {
+    skills.add("customer service");
+    skills.add("communication");
+  }
+
+  if (opportunity.categories.includes("Community") || opportunity.categories.includes("Food Relief")) {
+    skills.add("community impact");
+    skills.add("service delivery");
+  }
+
+  if (opportunity.categories.includes("Sustainability")) {
+    skills.add("sustainability projects");
+    skills.add("hands-on problem solving");
+  }
+
+  if (opportunity.categories.includes("Museum") || opportunity.categories.includes("Arts & Culture")) {
+    skills.add("public engagement");
+    skills.add("cultural programs");
+  }
+
+  if (opportunity.recommendedMajors.includes("Marketing")) {
+    skills.add("marketing exposure");
+  }
+
+  if (opportunity.recommendedMajors.includes("Event Management")) {
+    skills.add("event operations");
+  }
+
+  if (skills.size === 0) {
+    skills.add("communication");
+    skills.add("teamwork");
+    skills.add("local experience");
+  }
+
+  return [...skills].slice(0, 4);
+}
+
+function getFallbackResumeBullet(opportunity: Opportunity, usefulFor: string[]) {
+  const focus = usefulFor.slice(0, 3).join(", ");
+
+  return `Supported ${opportunity.organisation} volunteering activities, building ${focus} skills through local community experience.`;
 }

@@ -54,7 +54,7 @@ function writeStoredIds(ids: string[]) {
     }
   }
 
-  window.dispatchEvent(new Event(SAVED_EVENT));
+  window.setTimeout(() => window.dispatchEvent(new Event(SAVED_EVENT)), 0);
 }
 
 export function useSavedList() {

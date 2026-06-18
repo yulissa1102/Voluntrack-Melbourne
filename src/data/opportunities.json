@@ -41,7 +41,14 @@
     "dateNote": "Dates are based on currently collected information. Students should confirm details on the official page before applying.",
     "applicationLink": "https://mfw.melbourne.vic.gov.au/volunteers",
     "source": "Official website",
-    "internationalStudentFriendly": "Likely"
+    "internationalStudentFriendly": "Likely",
+    "resumeUsefulFor": [
+      "event operations",
+      "customer service",
+      "marketing exposure",
+      "stakeholder communication"
+    ],
+    "resumeBullet": "Supported event operations and visitor engagement for a major Melbourne cultural event, strengthening communication, teamwork and customer service skills."
   },
   {
     "id": "open-house-melbourne-volunteer",

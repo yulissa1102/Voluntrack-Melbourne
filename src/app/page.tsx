@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookmarkCheck } from "lucide-react";
+import { ArrowRight, BookmarkCheck, BriefcaseBusiness, CheckCircle2, ClipboardList, ListFilter, Tags } from "lucide-react";
 import { HeroStats } from "@/components/HeroStats";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
 import { getCategoryCount, getOpenOrUpcomingCount, opportunities } from "@/lib/opportunities";
@@ -57,6 +57,61 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="bg-paper pb-12">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.35fr_0.85fr] lg:px-8">
+          <div>
+            <p className="text-sm font-black uppercase text-gum">Student MVP</p>
+            <h2 className="mt-2 max-w-2xl text-3xl font-black text-ink">Why VolunTrack?</h2>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
+              Built to help international students find volunteering opportunities that are easier to compare, prepare
+              for, and use as local experience.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <FeatureCard
+                icon={ListFilter}
+                title="Student-friendly filtering"
+                copy="Find roles based on WWCC, police check, location, application status and time commitment."
+              />
+              <FeatureCard
+                icon={Tags}
+                title="Career relevance tags"
+                copy="Compare opportunities by relevance to business, events, sustainability, education, tourism and social impact."
+              />
+              <FeatureCard
+                icon={BriefcaseBusiness}
+                title="Application tracking"
+                copy="Save roles, compare deadlines, and plan what to prepare before applying."
+              />
+            </div>
+          </div>
+
+          <div className="self-end rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-paper text-river">
+                <ClipboardList className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <h2 className="text-lg font-black text-ink">What we are testing now</h2>
+            </div>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              This MVP is being tested with students to understand what helps them choose volunteering opportunities faster.
+            </p>
+            <ul className="mt-4 space-y-3">
+              {[
+                "Can international students find a suitable volunteering role faster with structured filters?",
+                "Which information matters most before applying: deadline, WWCC, police check, location, career relevance, or role type?",
+                "Do students want volunteering opportunities linked to resume and LinkedIn outcomes?"
+              ].map((item) => (
+                <li key={item} className="flex gap-2 text-sm leading-6 text-slate-700">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-leaf" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <OpportunityExplorer
         opportunities={opportunities}
         title="Explore International-student-friendly volunteering opportunities"
@@ -71,5 +126,25 @@ export default function HomePage() {
         </div>
       </section>
     </main>
+  );
+}
+
+function FeatureCard({
+  icon: Icon,
+  title,
+  copy
+}: {
+  icon: typeof ListFilter;
+  title: string;
+  copy: string;
+}) {
+  return (
+    <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-paper text-river">
+        <Icon className="h-4 w-4" aria-hidden="true" />
+      </span>
+      <h3 className="mt-4 text-base font-black text-ink">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-600">{copy}</p>
+    </article>
   );
 }

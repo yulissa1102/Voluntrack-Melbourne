@@ -82,4 +82,6 @@ export type Opportunity = {
   applicationLink: string;
   source: string;
   internationalStudentFriendly: InternationalStudentFriendly;
+  resumeUsefulFor?: string[];
+  resumeBullet?: string;
 };

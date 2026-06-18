@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import type { ElementType, ReactNode } from "react";
 import {
   ArrowLeft,
+  BriefcaseBusiness,
   CalendarDays,
+  CheckCircle2,
   ExternalLink,
   FileText,
   GraduationCap,
@@ -21,9 +23,11 @@ import {
   formatDate,
   getOpportunityById,
   getReminderTags,
+  getResumeSupport,
   opportunities,
   recordTypeCopy
 } from "@/lib/opportunities";
+import { NotifyButton } from "@/components/NotifyButton";
 import type { Opportunity } from "@/lib/types";
 
 type DetailPageProps = {
@@ -50,6 +54,8 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
   if (!opportunity) {
     notFound();
   }
+
+  const resumeSupport = getResumeSupport(opportunity);
 
   return (
     <main className="bg-paper">
@@ -79,9 +85,58 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
         </div>
       </section>
 
+      <section className="border-b border-slate-200 bg-paper py-5">
+        <div className="mx-auto grid max-w-5xl gap-3 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+          <SummaryItem icon={CalendarDays} label="Status" value={opportunity.applicationStatus} />
+          <SummaryItem icon={CalendarDays} label="Deadline" value={formatDate(opportunity.applicationDeadline)} />
+          <SummaryItem icon={MapPin} label="Location" value={opportunity.location} />
+          <SummaryItem
+            icon={ShieldCheck}
+            label="Checks"
+            value={`WWCC: ${opportunity.wwccStatus}; Police: ${opportunity.policeCheckStatus}`}
+          />
+        </div>
+      </section>
+
       <section className="py-10 sm:py-14">
         <div className="mx-auto grid max-w-5xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.35fr_0.85fr] lg:px-8">
           <div className="space-y-6">
+            <Panel title="Before you apply" icon={ListChecks}>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {[
+                  "Check deadline on the official page",
+                  "Prepare a short motivation statement",
+                  "Check whether WWCC is required",
+                  "Check shift dates and location",
+                  "Save this opportunity for follow-up"
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 rounded-lg border border-slate-200 bg-paper px-3 py-2 text-sm font-bold text-ink">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-leaf" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+
+            <Panel title="How this can support your resume" icon={BriefcaseBusiness}>
+              <div>
+                <p className="text-xs font-black uppercase text-slate-500">Useful for</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {resumeSupport.usefulFor.map((item) => (
+                    <Tag key={item} tone="green">
+                      {item}
+                    </Tag>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-4 rounded-lg border border-river/20 bg-river/10 p-3">
+                <p className="text-xs font-black uppercase text-river">Example resume bullet</p>
+                <p className="mt-2 text-sm leading-6 text-slate-700">{resumeSupport.bullet}</p>
+              </div>
+            </Panel>
+
+            <NotifyButton />
+
             <a
               href={opportunity.applicationLink}
               target="_blank"
@@ -95,10 +150,6 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
 
-            <Panel title="Full description" icon={FileText}>
-              <p className="text-base leading-8 text-slate-700">{opportunity.description}</p>
-            </Panel>
-
             <Panel title="Hard requirements" icon={ShieldCheck}>
               <ul className="space-y-3">
                 {opportunity.hardRequirements.map((requirement) => (
@@ -110,19 +161,8 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
               </ul>
             </Panel>
 
-            <Panel title="What to prepare" icon={ListChecks}>
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {[
-                  "Check official requirements",
-                  "Prepare availability",
-                  "Apply before deadline",
-                  "Confirm WWCC / Police Check if required"
-                ].map((item) => (
-                  <li key={item} className="rounded-lg border border-slate-200 bg-paper px-3 py-2 text-sm font-bold text-ink">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <Panel title="Full description" icon={FileText}>
+              <p className="text-base leading-8 text-slate-700">{opportunity.description}</p>
             </Panel>
 
             <Panel title="Career Relevance" icon={GraduationCap}>
@@ -189,6 +229,30 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
         </div>
       </section>
     </main>
+  );
+}
+
+function SummaryItem({
+  icon: Icon,
+  label,
+  value
+}: {
+  icon: ElementType;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-start gap-3">
+        <span className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-paper text-river">
+          <Icon className="h-4 w-4" aria-hidden="true" />
+        </span>
+        <div className="min-w-0">
+          <p className="text-xs font-black uppercase text-slate-500">{label}</p>
+          <p className="mt-1 text-sm font-bold leading-5 text-ink">{value}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
