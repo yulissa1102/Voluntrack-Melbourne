@@ -17,6 +17,10 @@ const aboutSections = [
   {
     title: "Our goal",
     text: "Our goal is to make volunteering more accessible, practical and career-relevant for international students building local experience in Australia."
+  },
+  {
+    title: "Information source",
+    text: "VolunTrack curates publicly available opportunity information and official application links. Students should confirm final details on the official organisation website before applying."
   }
 ];
 
@@ -24,21 +28,6 @@ const testingPoints = [
   "Can students find suitable roles faster with structured filters?",
   "Which information matters most before applying?",
   "Do resume and LinkedIn outcomes make volunteering more useful?"
-];
-
-const insightCards = [
-  {
-    quote: "I often skip volunteering roles when I do not understand whether WWCC or Police Check is required.",
-    label: "International student, business master's pathway"
-  },
-  {
-    quote: "I want local experience, but I also need to know how a role could support my resume or LinkedIn.",
-    label: "International student, graduate job seeker"
-  },
-  {
-    quote: "I prefer one-off or short-term roles because I am still balancing study, applications and part-time work.",
-    label: "International student, Melbourne-based"
-  }
 ];
 
 export default function AboutPage() {
@@ -56,9 +45,14 @@ export default function AboutPage() {
 
         <section className="mt-6 grid gap-4 md:grid-cols-2">
           {aboutSections.map((section) => (
-            <article key={section.title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <article key={section.title} className="flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
               <h2 className="text-lg font-black text-ink">{section.title}</h2>
               <p className="mt-3 text-sm leading-6 text-slate-600">{section.text}</p>
+              {section.title === "Information source" ? (
+                <p className="mt-3 text-xs font-semibold leading-5 text-slate-500">
+                  During MVP testing, saved roles and official application link clicks are tracked locally on this device.
+                </p>
+              ) : null}
             </article>
           ))}
         </section>
@@ -76,37 +70,6 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className="mt-6">
-          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-black text-ink">Early student insights</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
-              These early MVP insight prompts reflect the problems VolunTrack is designed to test with international
-              students.
-            </p>
-            <div className="mt-4 grid gap-4 md:grid-cols-3">
-              {insightCards.map((insight) => (
-                <figure key={insight.quote} className="rounded-lg border border-slate-200 bg-paper p-4">
-                  <blockquote className="text-sm font-semibold leading-6 text-ink">&ldquo;{insight.quote}&rdquo;</blockquote>
-                  <figcaption className="mt-3 text-xs font-bold leading-5 text-slate-500">{insight.label}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-sm">
-          <h2 className="text-lg font-black text-ink">Information source</h2>
-          <p className="mt-3">
-            VolunTrack curates publicly available opportunity information and official application links. It does not
-            require access to private university or student data at the MVP stage. Students should always confirm final
-            details on the official organisation website before applying.
-          </p>
-          <p className="mt-3 text-xs font-semibold leading-5 text-slate-500">
-            During MVP testing, VolunTrack tracks saved roles and official application link clicks locally to understand
-            which opportunities students are most interested in.
-          </p>
         </section>
 
         <section className="mt-6 flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">

@@ -5,6 +5,21 @@ import { HeroStats } from "@/components/HeroStats";
 import { OpportunityExplorer } from "@/components/OpportunityExplorer";
 import { getCategoryCount, getOpenOrUpcomingCount, opportunities } from "@/lib/opportunities";
 
+const insightCards = [
+  {
+    quote: "I often skip volunteering roles when I do not understand whether WWCC or Police Check is required.",
+    label: "International student · Master’s student"
+  },
+  {
+    quote: "I want local experience, but I also need to know how a role could support my resume or LinkedIn.",
+    label: "International student · Graduate job seeker"
+  },
+  {
+    quote: "I prefer one-off or short-term roles because I am still balancing study, applications and part-time work.",
+    label: "International student · Melbourne-based"
+  }
+];
+
 export default function HomePage() {
   return (
     <main>
@@ -74,7 +89,7 @@ export default function HomePage() {
               <FeatureCard
                 icon={Tags}
                 title="Career relevance tags"
-                copy="Compare roles linked to business, events, sustainability, education and social impact."
+                copy="Compare roles linked to business, sustainability, education and social impact."
               />
               <FeatureCard
                 icon={BriefcaseBusiness}
@@ -106,6 +121,30 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-paper pb-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-lg font-black text-ink">Early student insights</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+              These early MVP insight prompts reflect the problems VolunTrack is designed to test with international
+              students.
+            </p>
+            <div className="mt-4 grid gap-4 md:grid-cols-3">
+              {insightCards.map((insight) => (
+                <figure key={insight.quote} className="flex h-full flex-col rounded-lg border border-slate-200 bg-paper p-4">
+                  <blockquote className="flex-1 text-sm font-semibold leading-6 text-ink">
+                    &ldquo;{insight.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-3 text-xs font-bold leading-5 text-slate-500 md:whitespace-nowrap">
+                    {insight.label}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
       </section>
