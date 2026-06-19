@@ -173,8 +173,8 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
             Filters
           </div>
 
-          <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(280px,1.2fr)_minmax(220px,1fr)_minmax(220px,1fr)] lg:items-end">
-            <label className="relative block">
+          <div className="mt-4 grid gap-3 lg:grid-cols-4 lg:items-end">
+            <label className="relative block lg:col-span-2">
               <span className="mb-1.5 block text-xs font-bold uppercase text-slate-500">Search</span>
               <Search className="pointer-events-none absolute left-3 top-9 h-4 w-4 text-slate-400" aria-hidden="true" />
               <input
