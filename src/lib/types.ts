@@ -19,29 +19,27 @@ export type DateConfidence =
 
 export type Category =
   | "Events"
-  | "Arts & Culture"
   | "Community"
-  | "Sustainability"
-  | "Museum"
-  | "Sports"
-  | "Film & Media"
-  | "Education"
-  | "Food Relief"
-  | "Visitor Experience";
+  | "Visitor experience"
+  | "Environment"
+  | "Education support"
+  | "Fundraising"
+  | "Arts & culture"
+  | "Animal welfare"
+  | "Online / remote"
+  | "Food / hospitality support";
 
 export type CareerRelevance =
-  | "Business"
-  | "Marketing"
-  | "Communications"
-  | "Event Management"
-  | "Media"
-  | "Arts"
+  | "Business & operations"
+  | "Marketing & communications"
+  | "Customer service"
+  | "Event management"
   | "Sustainability"
   | "Education"
-  | "Health"
-  | "Tourism"
-  | "IT / Tech"
-  | "Social Impact";
+  | "Social impact"
+  | "Tourism & hospitality"
+  | "Arts & design"
+  | "Data / technology";
 
 export type OpportunityType =
   | "One-off"

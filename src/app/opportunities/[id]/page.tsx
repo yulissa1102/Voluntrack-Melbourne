@@ -7,14 +7,14 @@ import {
   BriefcaseBusiness,
   CalendarDays,
   CheckCircle2,
-  ExternalLink,
   FileText,
   GraduationCap,
-  LinkIcon,
   ListChecks,
   MapPin,
   ShieldCheck
 } from "lucide-react";
+import { NotifyButton } from "@/components/NotifyButton";
+import { OfficialApplicationLink } from "@/components/OfficialApplicationLink";
 import { SaveButton } from "@/components/SaveButton";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Tag } from "@/components/Tag";
@@ -29,7 +29,6 @@ import {
   opportunities,
   recordTypeCopy
 } from "@/lib/opportunities";
-import { NotifyButton } from "@/components/NotifyButton";
 import type { Opportunity } from "@/lib/types";
 
 type DetailPageProps = {
@@ -104,18 +103,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
       <section className="py-10 sm:py-14">
         <div className="mx-auto grid max-w-5xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.35fr_0.85fr] lg:px-8">
           <div className="space-y-6">
-            <a
-              href={opportunity.applicationLink}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-between gap-4 rounded-lg bg-ink p-4 text-sm font-black text-white transition hover:bg-river"
-            >
-              <span className="inline-flex items-center gap-2">
-                <LinkIcon className="h-4 w-4" aria-hidden="true" />
-                Official application link
-              </span>
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <OfficialApplicationLink opportunityId={opportunity.id} href={opportunity.applicationLink} />
 
             <Panel title="Before you apply" icon={ListChecks}>
               <ul className="grid gap-3 sm:grid-cols-2">
@@ -178,7 +166,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
             </Panel>
           </div>
 
-          <aside className="space-y-6">
+          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <Panel title="Application" icon={CalendarDays}>
               <div className="space-y-3">
                 <InfoRow label="Status" value={opportunity.applicationStatus} />

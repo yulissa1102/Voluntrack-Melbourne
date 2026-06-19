@@ -154,7 +154,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
     filters.recordType !== "All";
 
   return (
-    <section id="opportunities" className="bg-paper py-12 sm:py-16">
+    <section id="opportunities" className="scroll-mt-20 bg-paper py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
@@ -211,12 +211,14 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
           <div className="mt-4 grid items-start gap-4 lg:grid-cols-2">
             <MultiSelectGroup
               label="Category"
+              hint="Role type or volunteering setting"
               options={options.categories}
               selected={filters.categories}
               onToggle={(value) => toggleMultiFilter("categories", value)}
             />
             <MultiSelectGroup
               label="Career Relevance"
+              hint="Career direction or employability area"
               options={options.careerRelevance}
               selected={filters.careerRelevance}
               onToggle={(value) => toggleMultiFilter("careerRelevance", value)}
@@ -400,11 +402,13 @@ function InfoTooltip({ label, text }: { label: string; text: string }) {
 
 function MultiSelectGroup({
   label,
+  hint,
   options,
   selected,
   onToggle
 }: {
   label: string;
+  hint: string;
   options: string[];
   selected: string[];
   onToggle: (value: string) => void;
@@ -413,7 +417,10 @@ function MultiSelectGroup({
     <details className="self-start rounded-lg border border-slate-200 bg-slate-50 p-3">
       <summary className="cursor-pointer list-none text-xs font-bold uppercase text-slate-500 marker:hidden">
         <span className="flex items-center justify-between gap-3">
-          <span>{label}</span>
+          <span>
+            <span className="block">{label}</span>
+            <span className="mt-1 block text-[11px] font-semibold normal-case text-slate-500">{hint}</span>
+          </span>
           <span className="rounded-full bg-white px-2 py-1 text-[11px] text-slate-600">
             {selected.length ? `${selected.length} selected` : "Tap to expand"}
           </span>

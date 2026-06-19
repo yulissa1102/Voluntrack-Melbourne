@@ -15,12 +15,29 @@ const aboutSections = [
     text: "Many international students want local experience, but volunteering information is often scattered across different websites. Key details such as deadlines, checks, eligibility and career relevance are not always easy to compare."
   },
   {
-    title: "What we are testing",
-    text: "We are testing whether structured filters, clearer requirements and resume-focused guidance can help students choose suitable volunteering roles faster and with more confidence."
-  },
-  {
     title: "Our goal",
     text: "Our goal is to make volunteering more accessible, practical and career-relevant for international students building local experience in Australia."
+  }
+];
+
+const testingPoints = [
+  "Can students find suitable roles faster with structured filters?",
+  "Which information matters most before applying?",
+  "Do resume and LinkedIn outcomes make volunteering more useful?"
+];
+
+const insightCards = [
+  {
+    quote: "I often skip volunteering roles when I do not understand whether WWCC or Police Check is required.",
+    label: "International student, business master's pathway"
+  },
+  {
+    quote: "I want local experience, but I also need to know how a role could support my resume or LinkedIn.",
+    label: "International student, graduate job seeker"
+  },
+  {
+    quote: "I prefer one-off or short-term roles because I am still balancing study, applications and part-time work.",
+    label: "International student, Melbourne-based"
   }
 ];
 
@@ -44,6 +61,52 @@ export default function AboutPage() {
               <p className="mt-3 text-sm leading-6 text-slate-600">{section.text}</p>
             </article>
           ))}
+        </section>
+
+        <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-black text-ink">What we are testing</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+            We are testing whether structured filters, clearer requirements and resume-focused guidance can help
+            international students choose suitable volunteering roles faster and with more confidence.
+          </p>
+          <ul className="mt-4 grid gap-3 md:grid-cols-3">
+            {testingPoints.map((point) => (
+              <li key={point} className="rounded-lg border border-slate-200 bg-paper px-3 py-2 text-sm font-semibold leading-6 text-slate-700">
+                {point}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-6">
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-lg font-black text-ink">Early student insights</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+              These early MVP insight prompts reflect the problems VolunTrack is designed to test with international
+              students.
+            </p>
+            <div className="mt-4 grid gap-4 md:grid-cols-3">
+              {insightCards.map((insight) => (
+                <figure key={insight.quote} className="rounded-lg border border-slate-200 bg-paper p-4">
+                  <blockquote className="text-sm font-semibold leading-6 text-ink">&ldquo;{insight.quote}&rdquo;</blockquote>
+                  <figcaption className="mt-3 text-xs font-bold leading-5 text-slate-500">{insight.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-sm">
+          <h2 className="text-lg font-black text-ink">Information source</h2>
+          <p className="mt-3">
+            VolunTrack curates publicly available opportunity information and official application links. It does not
+            require access to private university or student data at the MVP stage. Students should always confirm final
+            details on the official organisation website before applying.
+          </p>
+          <p className="mt-3 text-xs font-semibold leading-5 text-slate-500">
+            During MVP testing, VolunTrack tracks saved roles and official application link clicks locally to understand
+            which opportunities students are most interested in.
+          </p>
         </section>
 
         <section className="mt-6 flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">

@@ -24,7 +24,7 @@ export default function HomePage() {
               Find volunteering opportunities for international students in Melbourne.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/[0.85] sm:text-lg">
-              Compare student-friendly roles by deadline, requirements, career relevance and application status — all in one place.
+              Stop guessing requirements. Compare student-friendly roles by deadline, checks, career relevance and application status — all in one place.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -89,16 +89,16 @@ export default function HomePage() {
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-paper text-river">
                 <ClipboardList className="h-4 w-4" aria-hidden="true" />
               </span>
-              <h2 className="text-lg font-black text-ink">What we are testing now</h2>
+              <h2 className="text-lg font-black text-ink">Built to help you decide faster</h2>
             </div>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              This MVP is being tested with students to understand what helps them choose volunteering opportunities faster.
+              VolunTrack helps international students compare opportunities before leaving for the official application page.
             </p>
             <ul className="mt-4 space-y-3">
               {[
-                "Can students find a suitable role faster with structured filters?",
-                "What information matters most before applying?",
-                "Do resume and LinkedIn outcomes make volunteering more useful?"
+                "Check whether a role is open and realistic for you",
+                "Compare deadlines, checks and career relevance",
+                "Save opportunities and prepare before applying"
               ].map((item) => (
                 <li key={item} className="flex gap-2 text-sm leading-6 text-slate-700">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-leaf" aria-hidden="true" />
@@ -113,7 +113,7 @@ export default function HomePage() {
       <OpportunityExplorer
         opportunities={opportunities}
         title="Explore International-student-friendly volunteering opportunities"
-        subtitle="Filter by category, career relevance, role type, application status, and checks and requirements. Career relevance tags are guidance only, not application restrictions."
+        subtitle="Filter by volunteering setting, career relevance, time commitment, availability, and checks and requirements. Career relevance tags are guidance only, not application restrictions."
       />
 
       <section className="border-t border-slate-200 bg-white py-8">

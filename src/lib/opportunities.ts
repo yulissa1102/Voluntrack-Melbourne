@@ -14,30 +14,28 @@ export const opportunities = opportunitiesData as Opportunity[];
 
 export const categoryOptions: Category[] = [
   "Events",
-  "Arts & Culture",
   "Community",
-  "Sustainability",
-  "Museum",
-  "Sports",
-  "Film & Media",
-  "Education",
-  "Food Relief",
-  "Visitor Experience"
+  "Visitor experience",
+  "Environment",
+  "Education support",
+  "Fundraising",
+  "Arts & culture",
+  "Animal welfare",
+  "Online / remote",
+  "Food / hospitality support"
 ];
 
 export const careerRelevanceOptions: CareerRelevance[] = [
-  "Business",
-  "Marketing",
-  "Communications",
-  "Event Management",
-  "Media",
-  "Arts",
+  "Business & operations",
+  "Marketing & communications",
+  "Customer service",
+  "Event management",
   "Sustainability",
   "Education",
-  "Health",
-  "Tourism",
-  "IT / Tech",
-  "Social Impact"
+  "Social impact",
+  "Tourism & hospitality",
+  "Arts & design",
+  "Data / technology"
 ];
 
 export const opportunityTypeOptions: OpportunityType[] = [
@@ -182,31 +180,31 @@ function getFallbackResumeUsefulFor(opportunity: Opportunity) {
     skills.add("teamwork");
   }
 
-  if (opportunity.categories.includes("Visitor Experience")) {
+  if (opportunity.categories.includes("Visitor experience")) {
     skills.add("customer service");
     skills.add("communication");
   }
 
-  if (opportunity.categories.includes("Community") || opportunity.categories.includes("Food Relief")) {
+  if (opportunity.categories.includes("Community") || opportunity.categories.includes("Food / hospitality support")) {
     skills.add("community impact");
     skills.add("service delivery");
   }
 
-  if (opportunity.categories.includes("Sustainability")) {
+  if (opportunity.categories.includes("Environment")) {
     skills.add("sustainability projects");
     skills.add("hands-on problem solving");
   }
 
-  if (opportunity.categories.includes("Museum") || opportunity.categories.includes("Arts & Culture")) {
+  if (opportunity.categories.includes("Arts & culture")) {
     skills.add("public engagement");
     skills.add("cultural programs");
   }
 
-  if (opportunity.recommendedMajors.includes("Marketing")) {
+  if (opportunity.recommendedMajors.includes("Marketing & communications")) {
     skills.add("marketing exposure");
   }
 
-  if (opportunity.recommendedMajors.includes("Event Management")) {
+  if (opportunity.recommendedMajors.includes("Event management")) {
     skills.add("event operations");
   }
 
@@ -231,15 +229,15 @@ function getResumeContext(opportunity: Opportunity) {
     return `event operations and visitor engagement with ${opportunity.organisation}`;
   }
 
-  if (opportunity.categories.includes("Sustainability")) {
+  if (opportunity.categories.includes("Environment")) {
     return `environmental volunteering activities with ${opportunity.organisation}`;
   }
 
-  if (opportunity.categories.includes("Food Relief") || opportunity.categories.includes("Community")) {
+  if (opportunity.categories.includes("Food / hospitality support") || opportunity.categories.includes("Community")) {
     return `community support activities with ${opportunity.organisation}`;
   }
 
-  if (opportunity.categories.includes("Museum") || opportunity.categories.includes("Arts & Culture")) {
+  if (opportunity.categories.includes("Arts & culture")) {
     return `visitor engagement and public program support with ${opportunity.organisation}`;
   }
 

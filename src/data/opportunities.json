@@ -6,16 +6,15 @@
     "organisation": "City of Melbourne",
     "categories": [
       "Events",
-      "Arts & Culture",
-      "Visitor Experience"
+      "Arts & culture",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -57,17 +56,17 @@
     "organisation": "Open House Melbourne",
     "categories": [
       "Events",
-      "Arts & Culture",
+      "Arts & culture",
       "Community",
-      "Visitor Experience"
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Arts",
-      "Tourism"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Tourism & hospitality",
+      "Customer service"
     ],
     "opportunityType": [
       "One-off",
@@ -111,15 +110,13 @@
     "organisation": "Nike Melbourne Marathon Festival",
     "categories": [
       "Events",
-      "Sports",
       "Community"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Health"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Social impact"
     ],
     "opportunityType": [
       "One-off",
@@ -155,17 +152,15 @@
     "organisation": "Melbourne International Film Festival / MIFF",
     "categories": [
       "Events",
-      "Arts & Culture",
-      "Film & Media",
-      "Visitor Experience"
+      "Arts & culture",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -201,18 +196,17 @@
     "organisation": "Midsumma Festival",
     "categories": [
       "Events",
-      "Arts & Culture",
+      "Arts & culture",
       "Community",
-      "Visitor Experience"
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts",
-      "Social Impact"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Social impact",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -249,19 +243,17 @@
     "organisation": "Melbourne Queer Film Festival / MQFF",
     "categories": [
       "Events",
-      "Arts & Culture",
-      "Film & Media",
+      "Arts & culture",
       "Community",
-      "Visitor Experience"
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts",
-      "Social Impact"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Social impact",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -297,19 +289,17 @@
     "organisation": "Melbourne Writers Festival / MWF",
     "categories": [
       "Events",
-      "Arts & Culture",
-      "Film & Media",
-      "Education",
-      "Visitor Experience"
+      "Arts & culture",
+      "Education support",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts",
-      "Education"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Education",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -343,16 +333,15 @@
     "organisation": "Melbourne Fringe",
     "categories": [
       "Events",
-      "Arts & Culture",
-      "Visitor Experience"
+      "Arts & culture",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -387,17 +376,14 @@
     "organisation": "St Kilda Blues Festival",
     "categories": [
       "Events",
-      "Arts & Culture",
-      "Community",
-      "Film & Media"
+      "Arts & culture",
+      "Community"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Media",
-      "Arts"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Arts & design"
     ],
     "opportunityType": [
       "One-off",
@@ -434,16 +420,16 @@
     "categories": [
       "Events",
       "Community",
-      "Arts & Culture",
-      "Visitor Experience"
+      "Arts & culture",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Tourism",
-      "Social Impact"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Tourism & hospitality",
+      "Social impact",
+      "Customer service"
     ],
     "opportunityType": [
       "One-off",
@@ -480,16 +466,16 @@
     "categories": [
       "Events",
       "Community",
-      "Arts & Culture",
-      "Visitor Experience"
+      "Arts & culture",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Event Management",
-      "Tourism",
-      "Arts"
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Tourism & hospitality",
+      "Arts & design",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -525,19 +511,16 @@
     "title": "ACMI Volunteer",
     "organisation": "ACMI",
     "categories": [
-      "Museum",
-      "Arts & Culture",
-      "Film & Media",
-      "Education",
-      "Visitor Experience"
+      "Arts & culture",
+      "Education support",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Media",
-      "Arts",
-      "Education"
+      "Business & operations",
+      "Marketing & communications",
+      "Arts & design",
+      "Education",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -575,17 +558,17 @@
     "title": "State Library Victoria Volunteer",
     "organisation": "State Library Victoria",
     "categories": [
-      "Education",
-      "Arts & Culture",
-      "Visitor Experience"
+      "Education support",
+      "Arts & culture",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Communications",
-      "Media",
-      "Arts",
+      "Business & operations",
+      "Marketing & communications",
+      "Arts & design",
       "Education",
-      "Tourism"
+      "Tourism & hospitality",
+      "Customer service"
     ],
     "opportunityType": [
       "Long-term",
@@ -620,18 +603,17 @@
     "title": "Museums Victoria Volunteer",
     "organisation": "Museums Victoria",
     "categories": [
-      "Museum",
-      "Education",
-      "Arts & Culture",
-      "Visitor Experience"
+      "Arts & culture",
+      "Education support",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Arts",
+      "Business & operations",
+      "Marketing & communications",
+      "Arts & design",
       "Education",
-      "Tourism"
+      "Tourism & hospitality",
+      "Customer service"
     ],
     "opportunityType": [
       "Long-term",
@@ -666,19 +648,19 @@
     "title": "National Trust Victoria Volunteer",
     "organisation": "National Trust of Australia (Victoria)",
     "categories": [
-      "Museum",
+      "Arts & culture",
       "Community",
-      "Sustainability",
-      "Visitor Experience"
+      "Environment",
+      "Visitor experience"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Communications",
-      "Arts",
+      "Business & operations",
+      "Marketing & communications",
+      "Arts & design",
       "Education",
-      "Tourism",
-      "Social Impact"
+      "Tourism & hospitality",
+      "Social impact",
+      "Customer service"
     ],
     "opportunityType": [
       "Short-term",
@@ -716,14 +698,14 @@
     "organisation": "Foodbank Victoria",
     "categories": [
       "Community",
-      "Food Relief"
+      "Food / hospitality support"
     ],
     "recommendedMajors": [
-      "Business",
+      "Business & operations",
       "Education",
-      "Health",
+      "Social impact",
       "Sustainability",
-      "Social Impact"
+      "Tourism & hospitality"
     ],
     "opportunityType": [
       "Short-term",
@@ -760,17 +742,17 @@
     "organisation": "OzHarvest Melbourne",
     "categories": [
       "Community",
-      "Sustainability",
-      "Food Relief",
+      "Environment",
+      "Food / hospitality support",
       "Events"
     ],
     "recommendedMajors": [
-      "Business",
-      "Marketing",
-      "Event Management",
-      "Health",
+      "Business & operations",
+      "Marketing & communications",
+      "Event management",
+      "Social impact",
       "Sustainability",
-      "Social Impact"
+      "Tourism & hospitality"
     ],
     "opportunityType": [
       "Short-term",
@@ -808,16 +790,15 @@
     "title": "Parks Victoria Volunteering",
     "organisation": "Parks Victoria",
     "categories": [
-      "Sustainability",
+      "Environment",
       "Community",
-      "Education"
+      "Education support"
     ],
     "recommendedMajors": [
       "Sustainability",
       "Education",
-      "Health",
-      "Tourism",
-      "Social Impact"
+      "Social impact",
+      "Tourism & hospitality"
     ],
     "opportunityType": [
       "One-off",
@@ -827,7 +808,7 @@
     ],
     "location": "Parks and reserves across Victoria",
     "shortDescription": "Suitable for students interested in environmental protection, outdoor activities, citizen science and conservation.",
-    "description": "Parks Victoria volunteer programs include corporate volunteering, citizen science, the Volunteer Track Ranger Program, the Campground Host Volunteer Program and park walk leaders. This channel fits the Sustainability category and is relevant to students interested in hands-on outdoor volunteering.",
+    "description": "Parks Victoria volunteer programs include corporate volunteering, citizen science, the Volunteer Track Ranger Program, the Campground Host Volunteer Program and park walk leaders. This channel fits the Environment category and Sustainability career relevance for students interested in hands-on outdoor volunteering.",
     "hardRequirements": [
       "Requirements depend on the specific project.",
       "Different projects may have different time, physical, location and safety requirements.",
@@ -853,14 +834,13 @@
     "title": "Green Links / Environmental Volunteering Victoria",
     "organisation": "Victorian Government / local community environmental groups",
     "categories": [
-      "Sustainability",
+      "Environment",
       "Community"
     ],
     "recommendedMajors": [
       "Sustainability",
       "Education",
-      "Health",
-      "Social Impact"
+      "Social impact"
     ],
     "opportunityType": [
       "One-off",
