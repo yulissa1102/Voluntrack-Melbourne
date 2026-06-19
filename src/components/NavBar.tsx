@@ -41,6 +41,12 @@ export function NavBar() {
             <span className="hidden sm:inline">Opportunities</span>
             <span className="sm:hidden">Browse</span>
           </Link>
+          <Link
+            href="/about"
+            className="rounded-lg px-2 py-2 text-slate-600 transition hover:bg-paper hover:text-ink sm:px-3"
+          >
+            About
+          </Link>
           <Link href="/saved" className="rounded-lg bg-ink px-2 py-2 text-white transition hover:bg-river sm:px-3">
             Saved
           </Link>

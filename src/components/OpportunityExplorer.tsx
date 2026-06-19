@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowDownUp, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowDownUp, Info, Search, SlidersHorizontal, X } from "lucide-react";
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { OpportunityCard } from "@/components/OpportunityCard";
 import {
   careerRelevanceOptions,
@@ -37,7 +37,7 @@ type OpportunityExplorerProps = {
   subtitle?: string;
 };
 
-type SortMode = "Closing soon" | "Opening soon" | "Open now";
+type SortMode = "Closest deadline first" | "Latest deadline first" | "No deadline / ongoing last";
 
 const emptyFilters: Filters = {
   categories: [],
@@ -49,17 +49,30 @@ const emptyFilters: Filters = {
   recordType: "All"
 };
 
+const defaultSortMode: SortMode = "Closest deadline first";
+
+const availabilityOptions: ApplicationStatus[] = [
+  "Open now",
+  "Closing soon",
+  "EOI open",
+  "Ongoing",
+  "Future reminder",
+  "Closed"
+];
+
 export function OpportunityExplorer({ opportunities, title = "Browse opportunities", subtitle }: OpportunityExplorerProps) {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<Filters>(emptyFilters);
-  const [sortMode, setSortMode] = useState<SortMode>("Closing soon");
+  const [sortMode, setSortMode] = useState<SortMode>(defaultSortMode);
 
   const options = useMemo(() => {
     return {
       categories: categoryOptions,
       careerRelevance: careerRelevanceOptions,
       opportunityTypes: opportunityTypeOptions,
-      statuses: uniqueSorted(opportunities.map((opportunity) => opportunity.applicationStatus)) as ApplicationStatus[],
+      statuses: availabilityOptions.filter((status) =>
+        opportunities.some((opportunity) => opportunity.applicationStatus === status)
+      ),
       wwccStatuses: uniqueSorted(opportunities.map((opportunity) => opportunity.wwccStatus)) as CheckStatus[],
       policeStatuses: uniqueSorted(opportunities.map((opportunity) => opportunity.policeCheckStatus)) as CheckStatus[],
       recordTypes: uniqueSorted(opportunities.map((opportunity) => opportunity.recordType)) as RecordType[]
@@ -173,14 +186,14 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
             </label>
 
             <Select
-              label="Sort by deadline"
+              label="Deadline order"
               value={sortMode}
               onChange={(value) => setSortMode(value as SortMode)}
               icon={<ArrowDownUp className="h-4 w-4 text-river" aria-hidden="true" />}
             >
-              <option>Closing soon</option>
-              <option>Opening soon</option>
-              <option>Open now</option>
+              <option>Closest deadline first</option>
+              <option>Latest deadline first</option>
+              <option>No deadline / ongoing last</option>
             </Select>
 
             <Select
@@ -212,7 +225,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <Select
-              label="Application status"
+              label="Availability"
               value={filters.applicationStatus}
               onChange={(value) => updateFilter("applicationStatus", value)}
             >
@@ -222,7 +235,17 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
               ))}
             </Select>
 
-            <Select label="WWCC" value={filters.wwccStatus} onChange={(value) => updateFilter("wwccStatus", value)}>
+            <Select
+              label="WWCC"
+              labelAddon={
+                <InfoTooltip
+                  label="WWCC"
+                  text="WWCC means Working with Children Check. Some roles involving children, young people or public programs may require it."
+                />
+              }
+              value={filters.wwccStatus}
+              onChange={(value) => updateFilter("wwccStatus", value)}
+            >
               <option>All</option>
               {options.wwccStatuses.map((status) => (
                 <option key={status}>{status}</option>
@@ -231,6 +254,12 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
 
             <Select
               label="Police Check"
+              labelAddon={
+                <InfoTooltip
+                  label="Police Check"
+                  text="A Police Check is a background check. Some organisations may request it for roles involving vulnerable people, money handling or sensitive settings."
+                />
+              }
               value={filters.policeCheckStatus}
               onChange={(value) => updateFilter("policeCheckStatus", value)}
             >
@@ -251,7 +280,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
           </div>
 
           <p className="mt-3 text-xs leading-5 text-slate-500">
-            WWCC stands for Working with Children Check. Some roles involving children or public programs may require it.
+            Use the info icons for quick explanations of checks before applying.
           </p>
 
           {hasActiveFilters ? (
@@ -260,7 +289,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
               onClick={() => {
                 setSearch("");
                 setFilters(emptyFilters);
-                setSortMode("Closing soon");
+                setSortMode(defaultSortMode);
               }}
               className="mt-4 inline-flex h-10 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-ink transition hover:border-gum hover:text-gum"
             >
@@ -285,7 +314,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
               onClick={() => {
                 setSearch("");
                 setFilters(emptyFilters);
-                setSortMode("Closing soon");
+                setSortMode(defaultSortMode);
               }}
               className="mt-5 inline-flex h-10 items-center rounded-lg bg-ink px-4 text-sm font-bold text-white transition hover:bg-river"
             >
@@ -303,28 +332,69 @@ function Select({
   value,
   onChange,
   children,
-  icon
+  icon,
+  labelAddon
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   children: ReactNode;
   icon?: ReactNode;
+  labelAddon?: ReactNode;
 }) {
+  const id = useId();
+
   return (
-    <label className="block">
-      <span className="mb-1.5 flex items-center gap-1.5 text-xs font-bold uppercase text-slate-500">
-        {icon}
-        {label}
-      </span>
+    <div className="block">
+      <div className="mb-1.5 flex items-center gap-1.5">
+        <label htmlFor={id} className="flex items-center gap-1.5 text-xs font-bold uppercase text-slate-500">
+          {icon}
+          {label}
+        </label>
+        {labelAddon}
+      </div>
       <select
+        id={id}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="h-11 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-ink outline-none transition focus:border-river focus:bg-white focus:ring-2 focus:ring-river/15"
       >
         {children}
       </select>
-    </label>
+    </div>
+  );
+}
+
+function InfoTooltip({ label, text }: { label: string; text: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const id = useId();
+
+  return (
+    <span className="relative inline-flex">
+      <button
+        type="button"
+        aria-label={`${label} information`}
+        aria-describedby={isOpen ? id : undefined}
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(true)}
+        onFocus={() => setIsOpen(true)}
+        onBlur={() => setIsOpen(false)}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:border-river hover:text-river focus:outline-none focus:ring-2 focus:ring-river/20"
+      >
+        <Info className="h-3.5 w-3.5" aria-hidden="true" />
+      </button>
+      {isOpen ? (
+        <span
+          id={id}
+          role="tooltip"
+          className="absolute left-0 top-6 z-20 w-64 rounded-lg border border-slate-200 bg-white p-3 text-xs font-semibold normal-case leading-5 text-slate-700 shadow-soft"
+        >
+          {text}
+        </span>
+      ) : null}
+    </span>
   );
 }
 
@@ -375,12 +445,15 @@ function MultiSelectGroup({
 
 function sortOpportunities(opportunities: Opportunity[], sortMode: SortMode) {
   return [...opportunities].sort((a, b) => {
-    const rankDifference = getStatusRank(a, sortMode) - getStatusRank(b, sortMode);
+    const rankDifference = getDeadlineRank(a, sortMode) - getDeadlineRank(b, sortMode);
     if (rankDifference !== 0) {
       return rankDifference;
     }
 
-    const dateDifference = getSortDateValue(a, sortMode) - getSortDateValue(b, sortMode);
+    const aDate = getDeadlineValue(a);
+    const bDate = getDeadlineValue(b);
+    const dateDifference = sortMode === "Latest deadline first" ? bDate - aDate : aDate - bDate;
+
     if (dateDifference !== 0) {
       return dateDifference;
     }
@@ -389,45 +462,20 @@ function sortOpportunities(opportunities: Opportunity[], sortMode: SortMode) {
   });
 }
 
-function getStatusRank(opportunity: Opportunity, sortMode: SortMode) {
-  const ranks: Record<SortMode, Record<ApplicationStatus, number>> = {
-    "Closing soon": {
-      "Closing soon": 0,
-      "Open now": 1,
-      "EOI open": 2,
-      "Opening soon": 3,
-      Ongoing: 4,
-      "Future reminder": 5,
-      Closed: 6
-    },
-    "Opening soon": {
-      "Opening soon": 0,
-      "Future reminder": 1,
-      "Open now": 2,
-      "EOI open": 3,
-      Ongoing: 4,
-      "Closing soon": 5,
-      Closed: 6
-    },
-    "Open now": {
-      "Open now": 0,
-      "EOI open": 1,
-      Ongoing: 2,
-      "Closing soon": 3,
-      "Opening soon": 4,
-      "Future reminder": 5,
-      Closed: 6
-    }
-  };
+function getDeadlineRank(opportunity: Opportunity, sortMode: SortMode) {
+  if (opportunity.applicationStatus === "Closed") {
+    return 3;
+  }
 
-  return ranks[sortMode][opportunity.applicationStatus];
+  if (opportunity.applicationStatus === "Ongoing") {
+    return sortMode === "No deadline / ongoing last" ? 2 : 1;
+  }
+
+  return opportunity.applicationDeadline ? 0 : 1;
 }
 
-function getSortDateValue(opportunity: Opportunity, sortMode: SortMode) {
-  const date =
-    sortMode === "Opening soon"
-      ? opportunity.applicationOpenDate ?? opportunity.eventStartDate ?? opportunity.applicationDeadline
-      : opportunity.applicationDeadline ?? opportunity.applicationOpenDate ?? opportunity.eventStartDate;
+function getDeadlineValue(opportunity: Opportunity) {
+  const date = opportunity.applicationDeadline;
 
   return date ? new Date(`${date}T00:00:00`).getTime() : Number.MAX_SAFE_INTEGER;
 }

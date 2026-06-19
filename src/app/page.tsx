@@ -21,10 +21,10 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase text-sun">Melbourne international student volunteering</p>
             <h1 className="mt-4 max-w-2xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-              Find student-friendly volunteering opportunities in Melbourne.
+              Find volunteering opportunities for international students in Melbourne.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/[0.85] sm:text-lg">
-              Compare volunteering roles by deadline, requirements, career relevance and application status — all in one place.
+              Compare student-friendly roles by deadline, requirements, career relevance and application status — all in one place.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -68,18 +68,18 @@ export default function HomePage() {
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               <FeatureCard
                 icon={ListFilter}
-                title="Student-friendly filtering"
-                copy="Find roles based on WWCC, police check, location, application status and time commitment."
+                title="Student-friendly filters"
+                copy="Filter by WWCC, police check, location, status and time commitment."
               />
               <FeatureCard
                 icon={Tags}
                 title="Career relevance tags"
-                copy="Compare opportunities by relevance to business, events, sustainability, education, tourism and social impact."
+                copy="Compare roles linked to business, events, sustainability, education and social impact."
               />
               <FeatureCard
                 icon={BriefcaseBusiness}
                 title="Application tracking"
-                copy="Save roles, compare deadlines, and plan what to prepare before applying."
+                copy="Save roles, compare deadlines and plan your next steps before applying."
               />
             </div>
           </div>
@@ -137,12 +137,12 @@ function FeatureCard({
   copy: string;
 }) {
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <article className="flex h-full flex-col rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
       <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-paper text-river">
         <Icon className="h-4 w-4" aria-hidden="true" />
       </span>
-      <h3 className="mt-4 text-base font-black text-ink">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-slate-600">{copy}</p>
+      <h3 className="mt-4 text-base font-black text-ink md:min-h-6">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-600 md:min-h-[4.5rem]">{copy}</p>
     </article>
   );
 }
