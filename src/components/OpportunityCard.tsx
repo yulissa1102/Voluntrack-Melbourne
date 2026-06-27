@@ -6,6 +6,7 @@ import { Tag } from "@/components/Tag";
 import {
   checkStatusTone,
   formatDate,
+  getEffectiveApplicationStatus,
   getReminderTags,
   recordTypeCopy
 } from "@/lib/opportunities";
@@ -16,6 +17,7 @@ type OpportunityCardProps = {
 };
 
 export function OpportunityCard({ opportunity }: OpportunityCardProps) {
+  const effectiveStatus = getEffectiveApplicationStatus(opportunity);
   const dateText = opportunity.applicationDeadline
     ? `Deadline: ${formatDate(opportunity.applicationDeadline)}`
     : opportunity.dateNote;
@@ -23,7 +25,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
   return (
     <article className="flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-river/40 hover:shadow-soft">
       <div className="flex flex-wrap items-center gap-2">
-        <StatusBadge status={opportunity.applicationStatus} />
+        <StatusBadge status={effectiveStatus} />
         <Tag tone={opportunity.recordType === "specific_opportunity" ? "green" : "blue"}>
           {recordTypeCopy[opportunity.recordType]}
         </Tag>

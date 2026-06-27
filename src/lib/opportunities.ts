@@ -92,26 +92,64 @@ export function formatDate(date: string | null) {
   }).format(new Date(`${date}T00:00:00`));
 }
 
+export function getMelbourneTodayDateString(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-AU", {
+    day: "2-digit",
+    month: "2-digit",
+    timeZone: "Australia/Melbourne",
+    year: "numeric"
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+export function getEffectiveApplicationStatus(
+  opportunity: Opportunity,
+  today = getMelbourneTodayDateString()
+): ApplicationStatus {
+  if (opportunity.applicationStatus === "Closed" || opportunity.applicationStatus === "Ongoing") {
+    return opportunity.applicationStatus;
+  }
+
+  if (opportunity.applicationDeadline && opportunity.applicationDeadline < today) {
+    return "Closed";
+  }
+
+  const openStatusWithoutDeadline =
+    opportunity.applicationStatus === "Open now" ||
+    opportunity.applicationStatus === "Closing soon" ||
+    opportunity.applicationStatus === "Opening soon" ||
+    opportunity.applicationStatus === "EOI open";
+
+  if (!opportunity.applicationDeadline && opportunity.eventEndDate && opportunity.eventEndDate < today && openStatusWithoutDeadline) {
+    return "Closed";
+  }
+
+  return opportunity.applicationStatus;
+}
+
 export function uniqueSorted(values: string[]) {
   return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
 
 export function getReminderTags(opportunity: Opportunity) {
   const tags = new Set<string>();
+  const effectiveStatus = getEffectiveApplicationStatus(opportunity);
 
-  if (opportunity.applicationStatus === "Closing soon") {
+  if (effectiveStatus === "Closing soon") {
     tags.add("Closing soon");
   }
 
-  if (opportunity.applicationStatus === "Opening soon") {
+  if (effectiveStatus === "Opening soon") {
     tags.add("Opens soon");
   }
 
-  if (opportunity.applicationStatus === "Future reminder") {
+  if (effectiveStatus === "Future reminder") {
     tags.add("Future reminder");
   }
 
-  if (opportunity.applicationStatus === "Closed") {
+  if (effectiveStatus === "Closed") {
     tags.add("Closed for this cycle");
   }
 
@@ -138,21 +176,23 @@ export function getResumeSupport(opportunity: Opportunity) {
 }
 
 export function getNotifyButtonLabel(opportunity: Opportunity) {
-  if (opportunity.applicationStatus === "Closed") {
+  const effectiveStatus = getEffectiveApplicationStatus(opportunity);
+
+  if (effectiveStatus === "Closed") {
     return "Notify me for next cycle";
   }
 
-  if (opportunity.applicationStatus === "Ongoing") {
+  if (effectiveStatus === "Ongoing") {
     return "Notify me about new roles";
   }
 
-  if (opportunity.applicationStatus === "Open now" || opportunity.applicationStatus === "Closing soon") {
+  if (effectiveStatus === "Open now" || effectiveStatus === "Closing soon") {
     return "Remind me before the deadline";
   }
 
   if (
-    opportunity.applicationStatus === "Opening soon" ||
-    opportunity.applicationStatus === "Future reminder" ||
+    effectiveStatus === "Opening soon" ||
+    effectiveStatus === "Future reminder" ||
     !opportunity.applicationOpenDate ||
     (!opportunity.applicationDeadline && opportunity.dateConfidence === "not_announced")
   ) {
@@ -163,7 +203,7 @@ export function getNotifyButtonLabel(opportunity: Opportunity) {
 }
 
 export function getOpenOrUpcomingCount() {
-  return opportunities.filter((opportunity) => opportunity.applicationStatus !== "Closed").length;
+  return opportunities.filter((opportunity) => getEffectiveApplicationStatus(opportunity) !== "Closed").length;
 }
 
 export function getCategoryCount() {

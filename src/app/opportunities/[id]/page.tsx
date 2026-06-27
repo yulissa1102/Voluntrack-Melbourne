@@ -22,6 +22,7 @@ import {
   checkStatusTone,
   dateConfidenceCopy,
   formatDate,
+  getEffectiveApplicationStatus,
   getNotifyButtonLabel,
   getOpportunityById,
   getReminderTags,
@@ -57,6 +58,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
   }
 
   const resumeSupport = getResumeSupport(opportunity);
+  const effectiveStatus = getEffectiveApplicationStatus(opportunity);
   const notifyButtonLabel = getNotifyButtonLabel(opportunity);
 
   return (
@@ -71,7 +73,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
           <div className="mt-6 flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <StatusBadge status={opportunity.applicationStatus} showDescription />
+                <StatusBadge status={effectiveStatus} showDescription />
                 <Tag tone={opportunity.recordType === "specific_opportunity" ? "green" : "blue"}>
                   {recordTypeCopy[opportunity.recordType]}
                 </Tag>
@@ -89,7 +91,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
 
       <section className="border-b border-slate-200 bg-paper py-5">
         <div className="mx-auto grid max-w-5xl gap-3 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
-          <SummaryItem icon={CalendarDays} label="Status" value={opportunity.applicationStatus} />
+          <SummaryItem icon={CalendarDays} label="Status" value={effectiveStatus} />
           <SummaryItem icon={CalendarDays} label="Deadline" value={formatDate(opportunity.applicationDeadline)} />
           <SummaryItem icon={MapPin} label="Location" value={opportunity.location} />
           <SummaryItem
@@ -169,7 +171,7 @@ export default async function OpportunityDetailPage({ params }: DetailPageProps)
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <Panel title="Application" icon={CalendarDays}>
               <div className="space-y-3">
-                <InfoRow label="Status" value={opportunity.applicationStatus} />
+                <InfoRow label="Status" value={effectiveStatus} />
                 <InfoRow label="Application opens" value={formatDate(opportunity.applicationOpenDate)} />
                 <InfoRow label="Deadline" value={formatDate(opportunity.applicationDeadline)} />
                 <InfoRow label="Event starts" value={formatDate(opportunity.eventStartDate)} />

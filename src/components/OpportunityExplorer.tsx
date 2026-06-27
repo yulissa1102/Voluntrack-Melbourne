@@ -7,6 +7,7 @@ import { OpportunityCard } from "@/components/OpportunityCard";
 import {
   careerRelevanceOptions,
   categoryOptions,
+  getEffectiveApplicationStatus,
   opportunityTypeOptions,
   recordTypeCopy,
   uniqueSorted
@@ -71,7 +72,7 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
       careerRelevance: careerRelevanceOptions,
       opportunityTypes: opportunityTypeOptions,
       statuses: availabilityOptions.filter((status) =>
-        opportunities.some((opportunity) => opportunity.applicationStatus === status)
+        opportunities.some((opportunity) => getEffectiveApplicationStatus(opportunity) === status)
       ),
       wwccStatuses: uniqueSorted(opportunities.map((opportunity) => opportunity.wwccStatus)) as CheckStatus[],
       policeStatuses: uniqueSorted(opportunities.map((opportunity) => opportunity.policeCheckStatus)) as CheckStatus[],
@@ -105,8 +106,9 @@ export function OpportunityExplorer({ opportunities, title = "Browse opportuniti
         filters.careerRelevance.some((career) => opportunity.recommendedMajors.includes(career as CareerRelevance));
       const matchesType =
         filters.opportunityType === "All" || opportunity.opportunityType.includes(filters.opportunityType as OpportunityType);
+      const effectiveStatus = getEffectiveApplicationStatus(opportunity);
       const matchesStatus =
-        filters.applicationStatus === "All" || opportunity.applicationStatus === filters.applicationStatus;
+        filters.applicationStatus === "All" || effectiveStatus === filters.applicationStatus;
       const matchesWwcc = filters.wwccStatus === "All" || opportunity.wwccStatus === filters.wwccStatus;
       const matchesPolice =
         filters.policeCheckStatus === "All" || opportunity.policeCheckStatus === filters.policeCheckStatus;
@@ -470,11 +472,13 @@ function sortOpportunities(opportunities: Opportunity[], sortMode: SortMode) {
 }
 
 function getDeadlineRank(opportunity: Opportunity, sortMode: SortMode) {
-  if (opportunity.applicationStatus === "Closed") {
+  const effectiveStatus = getEffectiveApplicationStatus(opportunity);
+
+  if (effectiveStatus === "Closed") {
     return 3;
   }
 
-  if (opportunity.applicationStatus === "Ongoing") {
+  if (effectiveStatus === "Ongoing") {
     return sortMode === "No deadline / ongoing last" ? 2 : 1;
   }
 
